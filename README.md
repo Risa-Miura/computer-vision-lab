@@ -1,88 +1,64 @@
-# Computer Vision Lab 📷✨
+# Computer Vision Lab
 
-hello! this is my lab notebook from the free
+My notebooks and scripts from the free
 [OpenCV Bootcamp](https://opencv.org/university/free-opencv-course/) by OpenCV
-University 🎓 I've done 12 of the 14 modules so far, and they all live here: everything
-from loading my very first image to stitching panoramas, HDR, tracking a race car 🏎️
-and finding faces 🙂
+University, covering modules 1–12 of 14: image basics, video, filtering, feature
+alignment, panoramas, HDR, object tracking and face detection.
 
-most of what's here is course material (the notebooks, scripts and sample
-assets), so the credit for that goes to OpenCV.org 💛 the bits I added myself:
+The notebooks, scripts and sample assets are course material. My changes are listed
+below and marked ✏️ in the module table.
 
-- got the video-writing (06) and object-tracking (11) notebooks running on my
-  Windows laptop. the course versions expect Google Colab, so I swapped in portable
-  paths and `imageio-ffmpeg` for the H.264 conversion
-- fixed the HDR notebook (10), where Mantiuk tone mapping was sneaking NaN pixels
-  into the saved image
-- switched to `opencv-contrib-python` so the older trackers (Boosting, TLD,
-  MedianFlow, MOSSE) work again
-- left line-by-line study notes in the camera scripts (05, 07) while I was
-  figuring out array shapes, BGR order and `waitKey`
-- a small fix so the image display demo (01) works from any folder
+## What I changed
 
-| panorama stitching (09) | CSRT tracking (11) |
-| --- | --- |
-| ![Boat photos stitched into one panorama](docs/images/panorama.jpg) | ![CSRT tracker following a race car](docs/images/tracking-csrt.jpg) |
+- Notebooks 06 and 11 run locally on Windows. The course versions assume Google
+  Colab, so I replaced the Colab paths and used `imageio-ffmpeg` for H.264 conversion.
+- Notebook 10: fixed NaN pixels from Mantiuk tone mapping that broke the saved image.
+- Notebook 11: switched to `opencv-contrib-python` so the legacy trackers (Boosting,
+  TLD, MedianFlow, MOSSE) are available.
+- `camera.py` and `camera_filters.py`: line-by-line study notes.
+- `display_image.py`: works from any working directory.
+
+## Previews
+
+**Panorama stitching (module 09):**
+
+![Boat photos stitched into one panorama](docs/images/panorama.jpg)
+
+**CSRT object tracking (module 11):**
+
+![CSRT tracker following a race car](docs/images/tracking-csrt.jpg)
 
 <!-- TODO: add docs/images/camera-filters-canny.jpg (camera_filters.py in Canny mode, key C) -->
 
-## modules
+## Modules
 
-✏️ = I changed something here
+| # | Topic | Files |
+|---|-------|-------|
+| 01 | Reading, displaying and saving images | Notebook, `display_image.py` ✏️ |
+| 02 | Cropping, resizing, flipping, pixel access | Notebook |
+| 03 | Drawing shapes and text | Notebook |
+| 04 | Brightness/contrast, thresholding, bitwise ops | Notebook |
+| 05 | Webcam preview | `camera.py` ✏️ |
+| 06 | Writing video files | Notebook ✏️ |
+| 07 | Live blur, Canny edges, corner detection | `camera_filters.py` ✏️ |
+| 08 | Form alignment with ORB + homography | Notebook |
+| 09 | Panorama stitching | Notebook |
+| 10 | HDR and tone mapping | Notebook ✏️ |
+| 11 | Object tracking (KCF, CSRT, GOTURN, ...) | Notebook ✏️ |
+| 12 | Face detection with a DNN model | `face_detection.py` |
 
-| # | what it's about | files |
-| --- | --- | --- |
-| 01 | image basics: reading, displaying, saving, BGR vs. RGB | notebook, `display_image.py` ✏️ |
-| 02 | cropping, resizing, flipping, poking at pixels | notebook |
-| 03 | drawing shapes and text | notebook |
-| 04 | brightness/contrast, thresholding, bitwise ops | notebook |
-| 05 | webcam preview | `camera.py` ✏️ |
-| 06 | writing video files | notebook ✏️ |
-| 07 | live blur, Canny edges and corner detection | `camera_filters.py` ✏️ |
-| 08 | lining up a scanned form with ORB + homography | notebook |
-| 09 | panorama stitching | notebook |
-| 10 | HDR and tone mapping | notebook ✏️ |
-| 11 | object tracking (KCF, CSRT, GOTURN, ...) | notebook ✏️ |
-| 12 | face detection with a DNN model | `face_detection.py` |
+## Project structure
 
-## running things
+- `notebooks/` — one folder per module (`01-image-basics/` … `12-face-detection/`) with its notebook or script and assets
+- `docs/images/` — README screenshots
+- `main.py` — prints the installed OpenCV version
+- `requirements.txt` — Python dependencies
 
-the camera scripts use your webcam by default, or you can hand them a video file
-instead
+## Credits
 
-```powershell
-# webcam preview (Esc to quit)
-python notebooks/05-camera-access/camera.py
-
-# live filters: P preview, B blur, C edges, F corners, Q/Esc quit
-python notebooks/07-image-filtering-and-edge-detection/camera_filters.py
-
-# same thing, no webcam needed
-python notebooks/07-image-filtering-and-edge-detection/camera_filters.py notebooks/06-video-writing/race_car.mp4
-```
-
-face detection has to run from its own folder, since it downloads the model files
-there the first time:
-
-```powershell
-Set-Location notebooks/12-face-detection
-python face_detection.py
-```
-
-for the notebooks, start Jupyter from inside the module folder so the relative
-asset paths work:
-
-```powershell
-Set-Location notebooks/09-panorama-creation
-jupyter notebook 09_panorama.ipynb
-```
-
-the tracking notebook (11) needs a kernel restart after its setup cell.
-
-## credits
-
-- [OpenCV Bootcamp](https://opencv.org/university/free-opencv-course/) by OpenCV
-  University. the notebooks, scripts, images, videos and models in `notebooks/`
-  are theirs.
-- GOTURN model: Held, Thrun and Savarese, *Learning to Track at 100 FPS with Deep
-  Regression Networks* (ECCV 2016).
+- [OpenCV Bootcamp](https://opencv.org/university/free-opencv-course/), OpenCV
+  University. The notebooks, scripts, images, videos and models in `notebooks/` are
+  theirs.
+- GOTURN model: Held, Thrun and Savarese,
+  [Learning to Track at 100 FPS with Deep Regression Networks](https://arxiv.org/abs/1604.01802),
+  ECCV 2016.
